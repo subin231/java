@@ -36,7 +36,5 @@ public class Test06 {
 		result(output);
 		
 		sc.close();
-		
-				
 	}
 }

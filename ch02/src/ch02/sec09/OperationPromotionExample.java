@@ -34,7 +34,7 @@ public class OperationPromotionExample {
 		int v11 = 2;
 		double result7 = (double) v10/v11;
 		System.out.println("result7 : "+ result7);
-		\
+	
 		
 		
 	}

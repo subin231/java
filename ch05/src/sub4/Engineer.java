@@ -10,6 +10,6 @@ public class Engineer extends Person {
 	
 	public void work() {
 		super.introduce();
-		System.out.println(field+"전공 입니다");
+		System.out.println(field+"엔지니어 입니다");
 	}
 }

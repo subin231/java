@@ -16,6 +16,6 @@ public class Person {
 	}
 	
 	public void introduce() {
-		System.out.print("제이름은["+name+"]이고 나이는 ["+age+"]세, ");
+		System.out.print("제이름은 ["+name+"] 이고 나이는 ["+age+"]세, ");
 	}
 }

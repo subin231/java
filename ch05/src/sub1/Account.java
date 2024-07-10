@@ -22,9 +22,5 @@ public class Account {
 		System.out.println("현재잔액 : "+balance);
 		
 		
-		
-	
-		
-		
 	}
 }

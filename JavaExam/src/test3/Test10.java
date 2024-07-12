@@ -26,7 +26,6 @@ public class Test10 {
 		Buyer  buyer  = new Customers();
 		Seller seller = new Customers();
 		
-		
 		buyer.buy();
 		seller.sell();
 	}

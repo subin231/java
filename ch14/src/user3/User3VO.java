@@ -1,23 +1,23 @@
 package user3;
 
 public class User3VO {
-
 	private String uid;
 	private String name;
 	private String birth;
 	private String hp;
-	private int age;
+	private String addr;
 	
 	public User3VO() {
 		super();
 	}
-
-	public User3VO(String uid, String name, String birth, String hp, int age) {
+	
+	public User3VO(String uid, String name, String birth, String hp, String addr) {
+		super();
 		this.uid = uid;
 		this.name = name;
 		this.birth = birth;
 		this.hp = hp;
-		this.age = age;
+		this.addr = addr;
 	}
 	
 	public String getUid() {
@@ -44,16 +44,19 @@ public class User3VO {
 	public void setHp(String hp) {
 		this.hp = hp;
 	}
-	public int getAge() {
-		return age;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User1VO [uid=" + uid + ", name=" + name + ", birth=" + birth + ", hp=" + hp + ", age=" + age + "]";
+		return "User3VO [uid=" + uid + ", name=" + name + ", birth=" + birth + ", hp=" + hp + ", addr=" + addr + "]";
 	}
+
+	
+	
 	
 }

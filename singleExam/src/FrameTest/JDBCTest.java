@@ -22,12 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import java.awt.Dialog.ModalExclusionType;
 
 public class JDBCTest extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTable tb_select;
+	private JPanel selectPane;
+	private JTable tbl_List;
+	private JButton btn_insert;
 
 	/**
 	 * Launch the application.
@@ -51,91 +53,64 @@ public class JDBCTest extends JFrame {
 	public JDBCTest() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 731, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		selectPane = new JPanel();
+		selectPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setContentPane(selectPane);
+		selectPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("조회");
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		tbl_List = new JTable();
+		tbl_List.setBounds(12, 87, 691, 364);
+		selectPane.add(tbl_List);
+		
+		//컬럼 설정
+		String[] colunmNames = {"아이디","이름","생년월일","휴대폰","나이"};
+		DefaultTableModel model = new DefaultTableModel(colunmNames,0);
+		model.setColumnCount(0);
+		tbl_List.setModel(model);
+		
+		JButton btn_select = new JButton("조회");
+		btn_select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String Host = "jdbc:mysql://127.0.0.1:3306/studydb";
-				String user = "root";
-				String pass = "1234";
-				
-				
-				List<User2VO> user2s = new ArrayList<>();
-				
-				
-				
-				
-				try {
-					//1단계 - 데이터베이스 접속
-					Connection conn = DriverManager.getConnection(Host,user,pass);
-					//2단계 - sql 실행 객체 생성
-					
-					String sql = "select * from `user2`";
-					PreparedStatement psmt = conn.prepareStatement(sql);
 								
-					//3단계 sql 실행
-					ResultSet rs = psmt.executeQuery();
-					
-					
-					//4단계 ResultSet 결과처리
-					while(rs.next()) {
-						String uid = rs.getString(1);
-						String name = rs.getString(2);
-						String birth = rs.getString(3);
-						String addr = rs.getString(4);
-						
-						
-						User2VO vo = new User2VO();
-						
-						
-						
-						vo.setUid(rs.getString(1));
-						vo.setName(rs.getString(2));
-						vo.setBirth(rs.getString(3));
-						vo.setAddr(rs.getString(4));
-						
-						user2s.add(vo);
-						
-					}
-					
-					//5단계 접속종료
-					rs.close();
-					psmt.close();
-					conn.close();
-					
-				} catch (Exception e1) {
-					e1.getMessage();
-				}
+				UserDAO dao = UserDAO.getInstance();
 				
+				List<User1VO> users = dao.selectUsers();
+															
 				DefaultTableModel model = new DefaultTableModel();
                 model.addColumn("UID");
                 model.addColumn("Name");
                 model.addColumn("Birth");
+                model.addColumn("Hp");
                 model.addColumn("Addr");
 
-                for (User2VO vo : user2s) {
+                for (User1VO vo : users) {
                 	
-                    model.addRow(new Object[]{vo.getUid(), vo.getName(), vo.getBirth(), vo.getAddr()});
+                    model.addRow(new Object[]{vo.getUid(), vo.getName(), vo.getBirth(), vo.getHp(), vo.getAge() });
                 }
 
-                tb_select.setModel(model);
+                tbl_List.setModel(model);
 
                 System.out.println("출력 완료");
 				
 				
 			}
 		});
-		btnNewButton.setBounds(399, 10, 97, 23);
-		contentPane.add(btnNewButton);
+		btn_select.setBounds(497, 10, 97, 23);
+		selectPane.add(btn_select);
 		
-		tb_select = new JTable();
-		tb_select.setBounds(12, 87, 691, 364);
-		contentPane.add(tb_select);
+		btn_insert = new JButton("등록");
+		btn_insert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btn_insert.setBounds(606, 10, 97, 23);
+		selectPane.add(btn_insert);
+		
+		
+	
 	}
 }
